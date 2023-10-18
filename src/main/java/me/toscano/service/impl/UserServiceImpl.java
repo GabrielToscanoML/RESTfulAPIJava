@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import me.toscano.santanderdev2023.model.User;
@@ -13,10 +14,8 @@ import me.toscano.service.UserService;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private final UserRepository userRepository;
-
-    // constructor
-    public UserServiceImpl(UserRepository userRepository) {this.userRepository = userRepository;}
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public List<User> findAll() {
