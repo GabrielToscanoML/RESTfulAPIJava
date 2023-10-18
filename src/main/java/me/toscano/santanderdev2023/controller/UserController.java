@@ -14,14 +14,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import me.toscano.santanderdev2023.model.User;
-import me.toscano.service.UserService;
+import me.toscano.santanderdev2023.service.UserService;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("users")
 public class UserController {
     
     @Autowired
     private UserService userService;
+    // private final UserService userService;
+
+    // public UserController(UserService userService) {
+    //     this.userService = userService;
+    // }
 
     @GetMapping
     public ResponseEntity<List<User>> findAll() {
@@ -42,9 +47,9 @@ public class UserController {
     public ResponseEntity<User> updateById(@PathVariable Long id, @RequestBody User userToCreate) {
         userService.updateById(id, userToCreate);
         return ResponseEntity.ok(userToCreate);
-    }
+    } 
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public ResponseEntity<User> deleteById(@PathVariable Long id) {
         userService.deleteById(id);
         return ResponseEntity.ok().build();

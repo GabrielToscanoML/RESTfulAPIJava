@@ -1,15 +1,14 @@
-package me.toscano.service.impl;
+package me.toscano.santanderdev2023.service.impl;
 
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import me.toscano.santanderdev2023.model.User;
 import me.toscano.santanderdev2023.repository.UserRepository;
-import me.toscano.service.UserService;
+import me.toscano.santanderdev2023.service.UserService;
+
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -39,10 +38,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public void updateById(Long id, User user) {
         Optional<User> userExists = userRepository.findById(id);
-        if (!userExists.isPresent()){
-            throw new NoSuchElementException("User does not exist.");
+        System.out.println("TRUE OU NAO AQUI"+ " " + userExists.isPresent());
+        if (userExists.isPresent()){
+            userRepository.save(user);
         }
-        userRepository.save(user);
+        throw new NoSuchElementException("User does not exist.");
     }
 
     @Override
